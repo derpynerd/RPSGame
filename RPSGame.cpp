@@ -1,72 +1,44 @@
-#include<iostream.h>
+#include<iostream>
 #include<stdlib.h>
 #include<conio.h>
-#include<fstream.h>
+#include<fstream>
+#include<time.h>
 char usr, cpu;
 int uscore=0, cscore=0, gamelen, ichoice;
-void intro();
-void introchoice(int);
+void clrscr();
 char cpumove(int);
 int decide(char, char);
 void play();
 void verdict();
-void main()
+int main()
 {
-	intro();
-	introchoice(ichoice);
+	srand(time(0)); // rand() seeding using current time
 	clrscr();
-	cout<<"Please enter the gamelength\n";
-	cin>>gamelen;
+	std::cout<<"Please enter the gamelength\n";
+	std::cin>>gamelen;
 	while(!(uscore==gamelen || cscore==gamelen))// terminates when any
 	{                                           // of the players reach
-		randomize();                        // the gamelength limit
-		clrscr();
+		clrscr();							// the gamelength limit
 		play();
 	}
 	clrscr();
 	verdict();
 	getch();
+	return 0;
 }
-void intro()
-{
-	for(int i=0;i<10;i++)
-	{
-		cout<<"*";
-	}
-	cout<<"|| ROCK-PAPER-SCISSORS ||\n\n";
-	cout<<"\t1) Create Profile\n\n";
-	cout<<"\t2) Load Profile\n\n";
-	cout<<"\t3) Rules\n\n";
-	cout<<"\t4) Quit\n\n";
-	cout<<"\tPress the corresponding key...\n";
-	cin>>ichoice;
-}
-void introchoice(x)
-{
-	switch(x)
-	{
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		default:cout<<"Please select a valid choice\n";
-			goto start;
-	}
+void clrscr() {
+	printf("\e[1;1H\e[2J");
 }
 void play()
 /*this function shows the scores of both cpu and user and takes inputs of
   the moves of both */
 {
-	cout<<"Your Score:"<<uscore;
-	cout<<"CPU's Score:"<<cscore<<endl;
-	cout<<"Your move:";
-	cin>>usr;
-	cpu=cpumove(random(3));
-	cout<<"CPU's move:"<<cpu;
+	std::cout<<"Your Score:"<<uscore;
+	std::cout<<"CPU's Score:"<<cscore<<std::endl;
+	std::cout<<"Your move:";
+	std::cin>>usr;
+	cpu=cpumove(rand() % 3);
+	std::cout<<"CPU's move:"<<cpu;
 	getch();
 	if(decide(usr, cpu)==1)
 	{
@@ -75,7 +47,7 @@ void play()
 	if(!decide(usr, cpu))
 	{
 		cscore++;
-		cout<<"\a";
+		std::cout<<"\a";
 	}
 }
 char cpumove(int x)
@@ -133,14 +105,14 @@ void verdict()
 {
 	if(cscore>uscore)
 	{
-		cout<<"YOU LOSE!!!\n";
+		std::cout<<"YOU LOSE!!!\n";
 	}
 	else if(uscore>cscore)
 	{
-		cout<<"YOU WON!!!\n";
+		std::cout<<"YOU WON!!!\n";
 	}
 	else
 	{
-		cout<<"IT'S A TIE!!!\n";
+		std::cout<<"IT'S A TIE!!!\n";
 	}
 }
